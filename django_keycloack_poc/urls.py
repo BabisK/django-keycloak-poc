@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('', include("app.urls")),
-    path('drf/', include("drftest.urls"))
+    path('drf/', include("drftest.urls")),
+    path('music/', include("perm.urls"))
 ]

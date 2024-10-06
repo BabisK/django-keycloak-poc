@@ -6,7 +6,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import TemplateView
+import logging
 
+logger = logging.getLogger(__name__)
 
 class ProfileView(TemplateView):
     template_name = "app/profile.html"
@@ -14,9 +16,11 @@ class ProfileView(TemplateView):
     def get(self, request: HttpRequest, *args, **kwargs):
         print(request)
         print(request.session.keys)
-        access_token = request.session['oidc_access_token']
 
-        url = 'http://localhost:8000/drf/testmodels/'
+        access_token = request.session['oidc_access_token']
+        logger.warning("Access Token: " + access_token)
+
+        url = 'http://localhost:8001/drf/testmodels/'
 
         headers = {
             'Authorization': 'Bearer {0}'.format(access_token)

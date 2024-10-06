@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
-    'drftest'
+    'drftest',
+    'perm'
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -144,18 +145,18 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-OIDC_AUTH_URI = 'http://192.168.1.3:8080/auth/realms/default'
+OIDC_AUTH_URI = 'http://localhost:8080/auth/realms/default'
 
-OIDC_RP_CLIENT_ID = os.getenv('OIDC_RP_CLIENT_ID', "django-keycloack-poc")
-OIDC_RP_CLIENT_SECRET = os.getenv('OIDC_RP_CLIENT_SECRET', "0de66831-cc7f-454d-947c-a72d29ca0974")
+OIDC_RP_CLIENT_ID = os.getenv('OIDC_RP_CLIENT_ID', "poc")
+OIDC_RP_CLIENT_SECRET = os.getenv('OIDC_RP_CLIENT_SECRET', "3582fedc-3bd1-4f76-82ff-87224a182c16")
 OIDC_OP_AUTHORIZATION_ENDPOINT = OIDC_AUTH_URI + '/protocol/openid-connect/auth'
 OIDC_OP_TOKEN_ENDPOINT = OIDC_AUTH_URI + '/protocol/openid-connect/token'
 OIDC_OP_USER_ENDPOINT = OIDC_AUTH_URI + '/protocol/openid-connect/userinfo'
-# OIDC_OP_JWKS_ENDPOINT = OIDC_AUTH_URI + '/protocol/openid-connect/certs'
-pem_prefix = '-----BEGIN PUBLIC KEY-----\n'
-pem_suffix = '\n-----END PUBLIC KEY-----'
-pem = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgaIgxGbjtR5TY5kPqTfbFWrs2Hv/CVMhhPiEZNW/olCkuw+SeDlIlpVSt4EQu/oPDV2W4rz1KK+o8GDVHE2Z6KL6REPJgPXmM420Gd4unCo/FU0JfjW16VrLJKl0+R+3l8lzPQBDwTqi7lWlcH/S6E7X31tJTCvMU0HgIIviF/34/1IZJtXCRph0+WvaYIEwlGun/LpPdK4hjdzUIEMP1/2g6EEbLM7ghlkcbF/3XSIwnvHHxSB8c8KBsnEQEAOGrdkl3SGmdWocConHsCjtub12ztkJvQjSrZ1oVN7WOqnbiHjUhRIyv30Pr2+Wkd01PPfyuwCnJkD2TrO0IBlWxwIDAQAB"
-key = "{}{}{}".format(pem_prefix, pem, pem_suffix)
+OIDC_OP_JWKS_ENDPOINT = OIDC_AUTH_URI + '/protocol/openid-connect/certs'
+# pem_prefix = '-----BEGIN PUBLIC KEY-----\n'
+# pem_suffix = '\n-----END PUBLIC KEY-----'
+# pem = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgaIgxGbjtR5TY5kPqTfbFWrs2Hv/CVMhhPiEZNW/olCkuw+SeDlIlpVSt4EQu/oPDV2W4rz1KK+o8GDVHE2Z6KL6REPJgPXmM420Gd4unCo/FU0JfjW16VrLJKl0+R+3l8lzPQBDwTqi7lWlcH/S6E7X31tJTCvMU0HgIIviF/34/1IZJtXCRph0+WvaYIEwlGun/LpPdK4hjdzUIEMP1/2g6EEbLM7ghlkcbF/3XSIwnvHHxSB8c8KBsnEQEAOGrdkl3SGmdWocConHsCjtub12ztkJvQjSrZ1oVN7WOqnbiHjUhRIyv30Pr2+Wkd01PPfyuwCnJkD2TrO0IBlWxwIDAQAB"
+# key = "{}{}{}".format(pem_prefix, pem, pem_suffix)
 # OIDC_RP_IDP_SIGN_KEY is used to validate the JWT tokens offline, without
 # connecting to Keycloak. This has the obvious benefit of lower latency and
 # less traffic to the IdP. But it also means that if the key is changed on the
@@ -166,9 +167,9 @@ key = "{}{}{}".format(pem_prefix, pem, pem_suffix)
 # -----BEGIN PUBLIC KEY-----
 # MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgaIgxGb...
 # -----END PUBLIC KEY-----
-OIDC_RP_IDP_SIGN_KEY = key
+# OIDC_RP_IDP_SIGN_KEY = key
 OIDC_RP_SIGN_ALGO = "RS256"
 OIDC_RP_SCOPES = "openid profile email"
-LOGIN_REDIRECT_URL = "http://localhost:8000/accounts/profile/"
-LOGOUT_REDIRECT_URL = "http://localhost:8000/accounts/login/"
+LOGIN_REDIRECT_URL = "http://localhost:8001/accounts/profile/"
+LOGOUT_REDIRECT_URL = "http://localhost:8001/accounts/login/"
 OIDC_STORE_ACCESS_TOKEN = True
